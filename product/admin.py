@@ -12,10 +12,9 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(models.ProductCategory)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status', 'is_delete']
+    list_display = ['title', 'status', 'parent', 'is_delete']
     list_editable = ['status', 'is_delete']
     list_filter = ['status', 'is_delete']
-
 
 admin.site.register(models.ProductGallery)
 

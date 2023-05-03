@@ -2,10 +2,10 @@ from django.db import models
 
 
 class ProductCategory(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name='عنوان دسته بندی')
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='دسته والد', null=True, blank=True)
+    title = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='عنوان دسته بندی')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, verbose_name='دسته والد',related_name='sub_cat' , null=True, blank=True)
     status = models.BooleanField(verbose_name= 'فعال / غیرفعال', default=True)
-    is_delete = models.BooleanField(verbose_name='حذف شده / نشده')
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده / نشده')
 
     class Meta:
         verbose_name = 'دسته بندی محصول'
@@ -24,7 +24,7 @@ class Product(models.Model):
     status = models.BooleanField(default=True, verbose_name='وضعیت')
     slug = models.SlugField(default="", null=False, blank=True, db_index=True, unique=True, max_length=200,
                             allow_unicode=True, verbose_name='عنوان در url')
-    is_delete = models.BooleanField(verbose_name='حذف شده/ نشده')
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده/ نشده')
 
     class Meta:
         verbose_name = 'محصول'

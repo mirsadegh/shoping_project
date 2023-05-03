@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Product, ProductGallery
+from .models import Product, ProductGallery, ProductCategory
 
 
 class ProductListView(ListView):
@@ -9,7 +9,23 @@ class ProductListView(ListView):
     model = Product
     paginate_by = 4
     context_object_name = 'products'
-    queryset = Product.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = ProductCategory.objects.filter(status=True, is_delete=False, parent=None)
+        return context
+    
+    def get_queryset(self):
+        query = super().get_queryset()
+        category = self.kwargs.get('cat_id')    
+        if category is not None:
+            query = query.filter(category__id__iexact=category) 
+        return query
+    
+    
+    
+   
+    
 
 
 class ProductDetailView(DetailView):
@@ -21,4 +37,6 @@ class ProductDetailView(DetailView):
         loaded_product = self.object
         context['product_galleries'] = ProductGallery.objects.filter(product_id=loaded_product.id).all()
         return context
+  
+  
     
