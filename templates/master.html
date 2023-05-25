@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+   {% include 'includes/header_reference.html' %}
+   {% block 'title' %} {% endblock %}
+<body>
+
+    <!-- start header -->
+         {% include 'includes/header.html' %}
+    <!-- end header -->
+
+    <!-- start main one col -->
+        {% block 'content' %} {% endblock %}  
+    <!-- end main one col -->
+
+    <!-- start body -->
+    <section class="container-xxl body-container">
+        <aside id="sidebar" class="sidebar">
+
+        </aside>
+        <main id="main-body" class="main-body">
+
+        </main>
+    </section>  
+    <!-- end body -->
+
+    <!-- start footer -->
+         {% include 'includes/footer.html' %}
+    <!-- end footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     {% include 'includes/footer_reference.html' %}
+</body>
+</html>

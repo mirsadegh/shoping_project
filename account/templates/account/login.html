@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap-reboot.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>ورود </title>
+</head>
+<body>
+    <section class="vh-100 d-flex justify-content-center align-items-center pb-5">
+            <form method='post'> 
+                {% csrf_token %}
+                <section class="login-wrapper mb-5">
+                    <section class="login-logo">
+                        <img src="{% static 'images/logo/4.png' %}" alt="">
+                    </section>     
+                        {% for error in form.none_field_errors %}
+                            <p class='alert alert-danger'>{{ error }}</p>
+                        {% endfor %} 
+                        <section class='login-title'>{{ form.phone.label_tag }}</section>
+                        <section class="login-input-text"> {{ form.phone }}</section>
+                       {% for error in form.phone.errors %}
+                            <p class="alert alert-danger">{{ error }}</p>
+                        {% endfor %}
+                       
+                         <section class='login-title'>{{ form.password.label_tag }}</section>
+                        <section class="login-input-text">{{ form.password }} </section>
+                        {% for error in form.password.errors %}
+                          <p class="alert alert-danger">{{ error }}</p>
+                        {% endfor %}
+
+                        <section class="login-btn d-grid g-2">
+                            <button class="btn btn-danger">ورود</button>
+                        </section>
+                
+                    
+                    <section class="login-terms-and-conditions">
+                        <a href="#">شرایط و قوانین</a> 
+                        را خوانده ام و پذیرفته ام
+                    </section>
+                </section>
+            </form>
+    </section>
+</body>
+</html>
+
+
+
+
+
