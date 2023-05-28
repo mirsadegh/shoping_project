@@ -1,19 +1,8 @@
+{% extends './base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap-reboot.rtl.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.rtl.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <title>ورود </title>
-</head>
-<body>
-    <section class="vh-100 d-flex justify-content-center align-items-center pb-5">
+{% block title %}ورود{% endblock %}
+{% block content %}
             <form method='post'> 
                 {% csrf_token %}
                 <section class="login-wrapper mb-5">
@@ -27,9 +16,9 @@
                         <section class="login-input-text"> {{ form.phone }}</section>
                        {% for error in form.phone.errors %}
                             <p class="alert alert-danger">{{ error }}</p>
-                        {% endfor %}
+                       {% endfor %}
                        
-                         <section class='login-title'>{{ form.password.label_tag }}</section>
+                        <section class='login-title'>{{ form.password.label_tag }}</section>
                         <section class="login-input-text">{{ form.password }} </section>
                         {% for error in form.password.errors %}
                           <p class="alert alert-danger">{{ error }}</p>
@@ -44,12 +33,13 @@
                         <a href="#">شرایط و قوانین</a> 
                         را خوانده ام و پذیرفته ام
                     </section>
+                    <section class="login-terms-and-conditions">
+                        <a href="{% url 'account:login_otp' %}">ثبت نام</a>    
+                    </section>
                 </section>
             </form>
-    </section>
-</body>
-</html>
 
+{% endblock %}
 
 
 

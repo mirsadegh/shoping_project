@@ -1,3 +1,17 @@
+@font-face {
+	font-family: IRANSans;
+	src: url('../fonts/IRANSans/IRANSansWeb_Light.woff'),
+	url('../fonts/IRANSans/IRANSansWeb_Light.woff') format('truetype');
+	font-weight: normal;
+}
+
+* {
+	direction: rtl;
+	text-align: right;
+	font-family:IRANSans;
+}
+
+
 .login-wrapper {
     border-radius: 0.25rem;
     background-color: #FFFFFF;
@@ -54,4 +68,8 @@
 
 .login-terms-and-conditions {
     font-size: 0.8rem;
+}
+
+#resend-otp{
+    font-size: 1rem;
 }

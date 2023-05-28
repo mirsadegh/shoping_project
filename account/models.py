@@ -1,37 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+from django.contrib.auth.models import AbstractBaseUser
+from .manager import UserManager
 
-
-class UserManager(BaseUserManager):
-    def create_user(self, phone, password=None):
-        """
-        Creates and saves a User with the given email
-         and password.
-        """
-        if not phone:
-            raise ValueError('Users must have an phone')
-
-        user = self.model(
-            phone=phone,
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, phone, password=None):
-        """
-        Creates and saves a superuser with the given email and password.
-        """
-        user = self.create_user(
-            phone,
-            password=password,
-        )
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
 
 
 class User(AbstractBaseUser):
@@ -42,8 +12,12 @@ class User(AbstractBaseUser):
         blank=True,
         unique=True,
     )
+    avatar = models.ImageField(upload_to='images/profile', verbose_name='تصویر اواتار', null=True, blank=True)
+    phone_active_code = models.CharField(max_length=100, verbose_name='کد فعال سازی ایمیل')
+    about_user = models.TextField(null=True, blank=True, verbose_name='درباره شخص')
     fullname = models.CharField(max_length=50, verbose_name="نام کامل")
-    phone = models.CharField(max_length=12, unique=True, verbose_name="شماره تلفن")
+    phone = models.CharField(max_length=12, unique=True,
+                             verbose_name="شماره تلفن")
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False, verbose_name="ادمین")
 
@@ -57,7 +31,7 @@ class User(AbstractBaseUser):
         verbose_name_plural = "کاربران"
 
     def __str__(self):
-        return self.phone
+        return self.fullname
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -74,5 +48,15 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Otp(models.Model):
+    token = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=11)
+    code = models.SmallIntegerField()
+    expiration_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.phone
 
 
