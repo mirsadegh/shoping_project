@@ -13,7 +13,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     avatar = models.ImageField(upload_to='images/profile', verbose_name='تصویر اواتار', null=True, blank=True)
-    phone_active_code = models.CharField(max_length=100, verbose_name='کد فعال سازی ایمیل')
+    phone_active_code = models.CharField(max_length=100, verbose_name='کد فعال سازی شماره همراه')
     about_user = models.TextField(null=True, blank=True, verbose_name='درباره شخص')
     fullname = models.CharField(max_length=50, verbose_name="نام کامل")
     phone = models.CharField(max_length=12, unique=True,

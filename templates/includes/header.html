@@ -1,5 +1,5 @@
     {% load static %}
-    
+    {% load thumbnail %}
     <header class="header mb-4">
         <!-- start top-header logo, searchbox and cart -->
         <section class="top-header">
@@ -54,10 +54,22 @@
                         {% if request.user.is_authenticated %}
                             <section class="d-inline px-md-3">
                                 <button class="btn btn-link text-decoration-none text-dark dropdown-toggle profile-button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-user"></i>
+                                    {% if request.user.avatar %}
+                                        {% thumbnail request.user.avatar "60x40" crop="center" as im %}
+                                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                        {% endthumbnail %}   
+                                    {% else %}
+                                      <i class="fa fa-user"></i>
+                                   {% endif %}    
                                 </button>
                                 <section class="dropdown-menu dropdown-menu-end custom-drop-down" aria-labelledby="dropdownMenuButton1">
-                                    <section><a class="dropdown-item" href="my-profile.html"><i class="fa fa-user-circle"></i>پروفایل {{ request.user.phone }}</a></section>
+                                    <section>
+                                        <a class="dropdown-item" href="my-profile.html">
+                                               <i class="fa fa-user-circle"></i> 
+                                               پروفایل 
+                                               {{ request.user.phone }}
+                                       </a>
+                                    </section>
                                     <section><a class="dropdown-item" href="my-orders.html"><i class="fa fa-newspaper"></i>سفارشات</a></section>
                                     <section><a class="dropdown-item" href="my-favorites.html"><i class="fa fa-heart"></i>لیست علاقه مندی</a></section>
                                     <section><hr class="dropdown-divider"></section>
@@ -72,6 +84,7 @@
                                 <section class="dropdown-menu dropdown-menu-end custom-drop-down" aria-labelledby="dropdownMenuButton1">
                                     <section><a class="dropdown-item" href="{% url 'account:login_user' %}"><i class="fa fa-user-circle"></i>صفحه ورود</a></section>
                                     <section><a class="dropdown-item" href="{% url 'account:register_user' %}"><i class="fa fa-newspaper"></i>ثبت نام</a></section>
+                                    <section><a class="dropdown-item" href="{% url 'account:login_otp' %}"><i class="fa fa-newspaper"></i> ثبت نام با شماره موبایل</a></section>
                             
                                 </section>
                             </section>
