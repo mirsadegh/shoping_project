@@ -1,0 +1,66 @@
+{% extends 'master.html' %}
+{% load thumbnail %}
+
+{% block title %} حساب کاربری{% endblock %}
+{% block content %}
+<section class="row">
+    {% include 'user_panel/includes/sidebar.html' %}
+    <main id="main-body" class="main-body col-md-9">
+        <section class="content-wrapper bg-white p-3 rounded-2 mb-2">
+            <!-- start vontent header -->
+            <section class="content-header mb-4">
+                <section class="d-flex justify-content-between align-items-center">
+                    <h2 class="content-header-title">
+                        <span>اطلاعات حساب</span>
+                    </h2>
+                    <section class="content-header-link">
+                        <!--<a href="#">مشاهده همه</a>-->
+                    </section>
+                </section>
+            </section>
+            <!-- end vontent header -->
+            <section class="d-flex justify-content-end my-4">
+                <a class="btn btn-link btn-sm text-info text-decoration-none mx-1" href="{% url 'user_panel:edit_profile' %}"><i class="fa fa-edit px-1"></i>ویرایش حساب</a>
+            </section>
+            <section class="row">
+                <section class="col-6 border-bottom mb-2 py-2">
+                    <section class="field-title">نام و نام خانوادگی</section>
+                    <section class="field-value overflow-auto">{{ request.user.fullname }}</section>
+                </section>
+
+         
+                <section class="col-6 border-bottom my-2 py-2">
+                    <section class="field-title">شماره تلفن همراه</section>
+                    <section class="field-value overflow-auto">{{ request.user.phone }}</section>
+                </section>
+
+                <section class="col-6 border-bottom my-2 py-2">
+                    <section class="field-title">ایمیل</section>
+                    <section class="field-value overflow-auto">{{ request.user.email }}</section>
+                </section>
+
+              
+                <section class="col-6 my-2 py-2">
+                    <section class="field-title">کلمه عبور</section>
+                    <section class="field-value overflow-auto">
+                        <a href="{% url 'user_panel:change_password' %}" class="btn btn-link btn-sm text-info text-decoration-none mx-1">
+                                   ویرایش کلمه عبور</a>
+                    </section>
+                </section>
+                <section class="col-6 my-3 py-3">
+                    <section class="field-title my-3">تصویر </section>
+                    <section class="field-value overflow-auto">
+                        {% thumbnail request.user.avatar "70x50" crop="center" as im %}
+                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        {% endthumbnail %}  
+                    </section>
+                </section>
+            </section>
+        </section>
+    </main>
+</section>
+{% endblock  %}
+
+
+
+

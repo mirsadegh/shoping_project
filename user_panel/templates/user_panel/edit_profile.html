@@ -1,0 +1,79 @@
+{% extends 'master.html' %}
+{% load thumbnail %}
+{% block title %}ویرایش حساب کاربری{% endblock %}
+
+{% block content %}
+
+    <section class="row">
+
+        {% include 'user_panel/includes/sidebar.html' %}
+        <main id="main-body" class="main-body col-md-9">
+            <section class="content-wrapper bg-white p-3 rounded-2 mb-2">
+
+                <!-- start vontent header -->
+                <section class="content-header mb-4">
+                    <section class="d-flex justify-content-between align-items-center">
+                        <h2 class="content-header-title">
+                            <span>ویرایش حساب</span>
+                        </h2>
+                        <section class="content-header-link">
+                            <!--<a href="#">مشاهده همه</a>-->
+                        </section>
+                    </section>
+                </section>
+                <!-- end vontent header -->
+                <form method="post" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <section class="row">
+                        {% for error in form.none_field_errors %}
+                            <p class='alert alert-danger mt-2'>{{ error }}</p>
+                        {% endfor %}
+                        <section class="col-6 my-2 py-2">
+                            <section class="field-title">{{ form.fullname.label_tag }}  </section>
+                            <section class="field-value overflow-auto">{{ form.fullname }}</section>
+                            {% for error in form.fullname.errors %}
+                                <p class="alert alert-danger mt-2">{{ error }}</p>
+                            {% endfor %}
+                        </section>
+                        <section class="col-6  my-2 py-2">
+                            <section class="field-title"> {{ form.phone.label_tag }} </section>
+                            <section class="field-value overflow-auto">{{ form.phone }}</section>
+                            {% for error in form.phone.errors %}
+                                  <p class="alert alert-danger mt-2">{{ error }}</p>
+                             {% endfor %}
+                        </section>
+
+                        <section class="col-6 my-2 py-2">
+                            <section class="field-title">{{ form.email.label_tag }}</section>
+                            <section class="field-value overflow-auto">{{ form.email }}</section>
+                            {% for error in form.email.errors %}
+                                  <p class="alert alert-danger mt-2">{{ error }}</p>
+                            {% endfor %}
+                        </section>
+
+                        <section class="col-6 my-2 py-2">
+                            <section class="field-title my-3">{{ form.avatar.label_tag }} </section>
+                            <section class="field-value overflow-auto">
+                                {{ form.avatar }}
+                            </section>
+                            {% for error in form.avatar.errors %}
+                                  <p class="alert alert-danger mt-2">{{ error }}</p>
+                            {% endfor %}
+                        </section>
+
+                        <section class="col-9 my-2 py-2"></section>
+                        <section class="col-3 my-2 py-2">
+
+                            <section class="field-value overflow-auto d-grid">
+                                <button type="submit" class="btn btn-info btn-block">ارسال</button>
+                            </section>
+                        </section>
+
+                    </section>
+            </form>
+            </section>
+        </main>
+    </section>
+{% endblock %}
+
+

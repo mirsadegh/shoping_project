@@ -1,25 +1,21 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
    {% include 'includes/header_reference.html' %}
-   {% block 'title' %} {% endblock %}
+   <title> {% block title %}{% endblock %} </title>
+
+  
 <body>
 
     <!-- start header -->
          {% include 'includes/header.html' %}
     <!-- end header -->
 
-    <!-- start main one col -->
-        {% block 'content' %} {% endblock %}  
-    <!-- end main one col -->
+      
 
     <!-- start body -->
     <section class="container-xxl body-container">
-        <aside id="sidebar" class="sidebar">
-
-        </aside>
-        <main id="main-body" class="main-body">
-
-        </main>
+        {% include 'includes/messages.html' %}
+        {% block content %} {% endblock %}
     </section>  
     <!-- end body -->
 
@@ -30,5 +26,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
      {% include 'includes/footer_reference.html' %}
+    {% load sweetify %}
+    {% sweetify %}
 </body>
 </html>

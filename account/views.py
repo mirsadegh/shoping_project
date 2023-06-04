@@ -66,6 +66,8 @@ class LoginUser(View):
             user = authenticate(username=cd['phone'], password=cd['password'])
             if user is not None:
                 login(request, user)
+                if request.GET.get('next'):
+                    return redirect(request.GET.get('next'))
                 return redirect('/')
             else:
                 form.add_error('phone', 'کاربر وارد شده پیدا نشد!.')
@@ -85,8 +87,8 @@ class OtpLoginView(View):
         if form.is_valid():
             cd = form.cleaned_data
             randcode = randint(1000, 9999)
-            settings.SMS.verification(
-                {'receptor': cd["phone"], 'type': '1', 'template': 'randcode', 'param1': randcode})
+            # settings.SMS.verification(
+            #     {'receptor': cd["phone"], 'type': '1', 'template': 'randcode', 'param1': randcode})
             token = str(uuid4())
             Otp.objects.create(phone=cd['phone'], code=randcode, token=token)
             print(randcode)
@@ -109,9 +111,9 @@ class CheckOtpView(View):
         add_expiration = gen_time + timedelta(minutes=2)
         expiration_second = calendar.timegm(add_expiration.timetuple())
 
-        remaind_time = (expiration_second - current_time_sec)*1000
+        remained_time = (expiration_second - current_time_sec)*1000
 
-        return render(request, "account/check_otp.html", {'form': form, 'remaind_time': remaind_time})
+        return render(request, "account/check_otp.html", {'form': form, 'remained_time': remained_time})
 
     def post(self, request):
         token = request.GET.get("token")
@@ -130,7 +132,8 @@ class CheckOtpView(View):
                     otp = Otp.objects.get(token=token)
                     user, is_create = User.objects.get_or_create(
                         phone=otp.phone)
-                    user.set_password('12345678')
+                    user.set_password('12345678') 
+                    user.phone_active_code = datetime.now()    
                     user.save()
                     login(request, user)
                     otp.delete()

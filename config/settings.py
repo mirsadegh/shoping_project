@@ -14,6 +14,7 @@ from pathlib import Path
 import ghasedakpack
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,9 +44,14 @@ INSTALLED_APPS = [
     # my app
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
+    'user_panel.apps.UserPanelConfig',
 
+
+    'django_cleanup.apps.CleanupConfig',
     'django_dump_die',
     'sorl.thumbnail',
+    'imagekit',
+    'sweetify',
 
 ]
 
@@ -146,8 +152,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "account.User"
-
+LOGIN_URL = '/login-user'
 
 
 SMS = ghasedakpack.Ghasedak("44de33c2f3507b45d5ea4cca47878d8899653fbae469e9f0f6f3ffc91cf5e5fd")
 
+# possible options: 'sweetalert', 'sweetalert2' - default is 'sweetalert2'
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
