@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
     'user_panel.apps.UserPanelConfig',
+    'product.apps.ProductConfig',
+    'polls.apps.PollsConfig',
 
 
     'django_cleanup.apps.CleanupConfig',

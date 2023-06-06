@@ -3,7 +3,7 @@
    {% include 'includes/header_reference.html' %}
    <title> {% block title %}{% endblock %} </title>
 
-  
+  {% block header_reference %}{% endblock  %}
 <body>
 
     <!-- start header -->
@@ -28,5 +28,7 @@
      {% include 'includes/footer_reference.html' %}
     {% load sweetify %}
     {% sweetify %}
+    {% block footer_reference %}{% endblock footer_reference %}
+
 </body>
 </html>

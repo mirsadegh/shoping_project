@@ -80,6 +80,7 @@ class ChangePasswordView(View):
             user = User.objects.get(id=user_id)
             user.set_password(cd.get('password'))
             user.save()
+            sweetify.success(request, 'کلمه عبور با موفقیت بروزرسانی گردید')
             return redirect(reverse('account:login_user')+"?next="+ request.path)
         return render(request , 'user_panel/change_password.html', {'form': form})
 

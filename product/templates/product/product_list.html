@@ -1,0 +1,114 @@
+{% extends 'master.html' %}
+{% load poll_extras %}
+{% load thumbnail %}
+
+{% block title %}لیست محصولات{% endblock %}
+
+{% block content %}
+
+
+<section class="row">
+    {% include 'product/includes/sidebar.html' %}
+    <main id="main-body" class="main-body col-md-9">
+        <section class="content-wrapper bg-white p-3 rounded-2 mb-2">
+            
+            <section class="sort ">
+                <span>مرتب سازی بر اساس : </span>
+                <button class="btn btn-info btn-sm px-1 py-0" type="button">جدیدترین</button>
+                <button class="btn btn-light btn-sm px-1 py-0" type="button">محبوب ترین</button>
+                <button class="btn btn-light btn-sm px-1 py-0" type="button">گران ترین</button>
+                <button class="btn btn-light btn-sm px-1 py-0" type="button">ارزان ترین</button>
+                <button class="btn btn-light btn-sm px-1 py-0" type="button">پربازدیدترین</button>
+                <button class="btn btn-light btn-sm px-1 py-0" type="button">پرفروش ترین</button>
+            </section>
+
+            <section class="main-product-wrapper row my-4">
+
+                {% for product in products %}
+                    <section class="col-md-3 p-0">
+                        <section class="product">
+                            <section class="product-add-to-cart"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به سبد خرید"><i class="fa fa-cart-plus"></i></a></section>
+                            <section class="product-add-to-favorite"><a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="افزودن به علاقه مندی"><i class="fa fa-heart"></i></a></section>
+                            <a class="product-link" href="{% url 'product:product_detail' product.slug %} ">
+                                <section class="product-image">
+                                
+                                       <img class="" src="{{ product.image.url }}" alt="">
+                                 
+                                </section>
+                                <section class="product-colors"></section>
+                                <section class="product-name"><h3>{{ product.title  }}</h3></section>
+                                <section class="product-price-wrapper">
+                                    <section class="product-price">{{ product.price| three_digits_currency }} </section>
+                                </section>
+                            </a>
+                        </section>
+                    </section>
+               {% endfor %}
+                
+               {% if page_obj.has_other_pages %}
+                    <section class="col-12">
+                        <section class="my-4 d-flex justify-content-center">
+                            <nav>
+                                <ul class="pagination">
+
+                                    {% if page_obj.has_previous %}
+                                    
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
+
+                                {% else %}
+                                
+                                        <li class="page-item disabled">
+                                            <span class="page-link" href="#" aria-label="Previous">      
+                                                <span aria-hidden="true">«</span>
+                                            </span>
+                                        </li>
+                                
+                                {% endif %}                               
+                                    {% for pageNumber in paginator.page_range  %}
+                                    {% if page_obj.number == pageNumber %}
+                                            <li class="page-item active">
+                                                <span class="page-link" >{{ pageNumber }}</span>
+                                            </li>
+                                    {% else %} 
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ pageNumber }}">{{ pageNumber }}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">   
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li> 
+                                    {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link"  aria-label="Next">   
+                                                    <span aria-hidden="true">»</span>
+                                                </span>
+                                            </li> 
+                                    {% endif %}                       
+                                </ul>
+                            </nav>
+                        </section>
+                    </section>
+                {% endif %}
+
+            </section>
+        </section>
+    </main>
+</section>
+{% endblock %}
+
+
+
+
+
+
+
+
