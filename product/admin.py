@@ -2,22 +2,21 @@ from django.contrib import admin
 from . import models
 
 
+@admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'status', 'is_delete']
+    list_display = ['title', 'price', 'category', 'status', 'is_delete']
+    list_editable = ['status', 'is_delete', 'category']
+    list_filter = ['status', 'is_delete', 'category']
+    prepopulated_fields = {'slug': ['title']}
+
+
+@admin.register(models.ProductCategory)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['title', 'status', 'is_delete']
     list_editable = ['status', 'is_delete']
     list_filter = ['status', 'is_delete']
 
-admin.site.register(models.Product,ProductAdmin)
+
 admin.site.register(models.ProductGallery)
-
-
-
-
-
-
-
-
-
-
 
 

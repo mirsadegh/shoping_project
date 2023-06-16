@@ -7,10 +7,9 @@ from .models import Product, ProductGallery
 class ProductListView(ListView):
     template_name = 'product/product_list.html'
     model = Product
-    paginate_by = 1
+    paginate_by = 4
     context_object_name = 'products'
     queryset = Product.objects.all()
-
 
 
 class ProductDetailView(DetailView):
@@ -23,11 +22,3 @@ class ProductDetailView(DetailView):
         context['product_galleries'] = ProductGallery.objects.filter(product_id=loaded_product.id).all()
         return context
     
-
-
-
-
-
-
-
-

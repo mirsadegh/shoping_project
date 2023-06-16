@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'django_dump_die',
     'sorl.thumbnail',
-    'imagekit',
     'sweetify',
 
 ]
