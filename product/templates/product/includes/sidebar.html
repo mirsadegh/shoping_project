@@ -1,7 +1,4 @@
-
 <aside id="sidebar" class="sidebar col-md-3">
-
-
     <section class="content-wrapper bg-white p-3 rounded-2 mb-3">
         <!-- start sidebar nav-->
         <section class="sidebar-nav">
@@ -21,51 +18,46 @@
         </section>
         <!--end sidebar nav-->
     </section>
-
-
-
-    <section class="content-wrapper bg-white p-3 rounded-2 mb-3">
-        <section class="content-header mb-3">
-            <section class="d-flex justify-content-between align-items-center">
-                <h2 class="content-header-title content-header-title-small">
-                    برند
-                </h2>
-                <section class="content-header-link">
-                    <!--<a href="#">مشاهده همه</a>-->
+    <form >
+        <section class="content-wrapper bg-white p-3 rounded-2 mb-3">
+            <section class="content-header mb-3">
+                <section class="d-flex justify-content-between align-items-center">
+                    <h2 class="content-header-title content-header-title-small">
+                        برند
+                    </h2>
+                    <section class="content-header-link">
+                        <!--<a href="#">مشاهده همه</a>-->
+                    </section>
                 </section>
             </section>
-        </section>
-
-        <section class="sidebar-brand-wrapper mb-3">
-            <section class="form-check sidebar-brand-item">
-                <input class="form-check-input" type="checkbox" value="1" id="1">
-                <label class="form-check-label d-flex justify-content-between" for="1">
-                    <span>شیائومی</span>
-                    <span>xiaomi</span>
-                </label>
+            <section class="sidebar-brand-wrapper mb-3">          
+                {% for brand in brands %}
+                <section class="form-check sidebar-brand-item">
+                        <input class="form-check-input" type="checkbox" value="{{ brand.id }}" id="{{ brand.id }}">
+                        <label class="form-check-label d-flex justify-content-between" for="{{ brand.id }}">
+                            <span>{{ brand.title }}</span>
+                        </label>
+                </section> 
+                {% endfor %} 
             </section>
-   
-        </section>
-
-        <section class="content-header mb-4">
-            <section class="d-flex justify-content-between align-items-center">
-                <h2 class="content-header-title content-header-title-small">
-                    محدوده قیمت
-                </h2>
-                <section class="content-header-link">
-                    <!--<a href="#">مشاهده همه</a>-->
+            <section class="content-header mb-4">
+                <section class="d-flex justify-content-between align-items-center">
+                    <h2 class="content-header-title content-header-title-small">
+                        محدوده قیمت
+                    </h2>
+                    <section class="content-header-link">
+                        <!--<a href="#">مشاهده همه</a>-->
+                    </section>
                 </section>
             </section>
-        </section>
-        <section class="sidebar-price-range d-flex justify-content-between mb-4">
-            <section class="p-1"><input type="text" placeholder="قیمت از ..."></section>
-            <section class="p-1"><input type="text" placeholder="قیمت تا ..."></section>
-        </section>
+            <section class="sidebar-price-range d-flex justify-content-between mb-4">
+                <section class="p-1"><input type="text" placeholder="قیمت از ..."></section>
+                <section class="p-1"><input type="text" placeholder="قیمت تا ..."></section>
+            </section>
 
-        <section class="sidebar-filter-btn d-grid gap-2">
-            <button class="btn btn-danger" type="button">اعمال فیلتر</button>
+            <section class="sidebar-filter-btn d-grid gap-2">
+                <button class="btn btn-danger" type="button">اعمال فیلتر</button>
+            </section>
         </section>
-
-    </section>
-
+    </form>
 </aside>

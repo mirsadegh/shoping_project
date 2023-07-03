@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Product, ProductGallery, ProductCategory
+from .models import Product, ProductGallery, ProductCategory, ProductBrand
 
 
 class ProductListView(ListView):
@@ -13,6 +13,7 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = ProductCategory.objects.filter(status=True, is_delete=False, parent=None)
+        context["brands"] = ProductBrand.objects.filter(status=True)
         return context
     
     def get_queryset(self):
@@ -24,10 +25,6 @@ class ProductListView(ListView):
     
     
     
-   
-    
-
-
 class ProductDetailView(DetailView):
     template_name = 'product/product_detail.html'
     model = Product

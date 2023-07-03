@@ -13,6 +13,18 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.title
+    
+class ProductBrand(models.Model):
+    title = models.CharField(max_length=300, db_index=True, unique=True, verbose_name='عنوان برند')
+    status = models.BooleanField(default=True, verbose_name='فعال / غیر فعال')   
+    
+    class Meta:
+        verbose_name =  'برند'
+        verbose_name_plural = 'برند ها'
+        
+    def __str__(self):
+        return self.title
+        
 
 
 class Product(models.Model):
@@ -20,6 +32,7 @@ class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='category', verbose_name='دسته بندی')
     description = models.TextField(verbose_name='توضیحات محصول')
     image = models.ImageField(upload_to='images/products', blank=True, null=True, verbose_name='تصویر محصول')
+    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, related_name='brand', verbose_name='برند', null=True, blank=True)
     price = models.IntegerField(verbose_name='قیمت')
     status = models.BooleanField(default=True, verbose_name='وضعیت')
     slug = models.SlugField(default="", null=False, blank=True, db_index=True, unique=True, max_length=200,

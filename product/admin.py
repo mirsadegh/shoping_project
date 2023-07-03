@@ -16,6 +16,12 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ['status', 'is_delete']
     list_filter = ['status', 'is_delete']
 
+@admin.register(models.ProductBrand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ['title', 'status']
+    list_editable = ['status']
+    list_filter = ['status']
+
 admin.site.register(models.ProductGallery)
 
 
