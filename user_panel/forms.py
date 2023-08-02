@@ -1,6 +1,7 @@
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
+from account.models import User
 
 
 def start_with_0(value):
@@ -8,7 +9,10 @@ def start_with_0(value):
         raise forms.ValidationError("شماره موبایل باید با صفر شروع شود!")
 
 
-class ChangeProfile(forms.Form):
+class ChangeProfile(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('fullname', 'phone', 'email', 'avatar')
     fullname = forms.CharField(label='نام و نام خانوادگی',
                                required=False,
                                widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -27,6 +31,7 @@ class ChangeProfile(forms.Form):
     avatar = forms.ImageField(label='تصویر کاربر',
                               required=False,
                               widget=forms.FileInput)
+
 
 
 class ChangePasswordForm(forms.Form):

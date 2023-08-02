@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.ProductBrand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status']
+    list_display = ['title', 'status', 'image']
     list_editable = ['status']
     list_filter = ['status']
 

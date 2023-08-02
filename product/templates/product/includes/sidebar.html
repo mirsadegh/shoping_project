@@ -18,7 +18,7 @@
         </section>
         <!--end sidebar nav-->
     </section>
-    <form >
+    <form action="{% url 'product:product_filter' %}" method="get">
         <section class="content-wrapper bg-white p-3 rounded-2 mb-3">
             <section class="content-header mb-3">
                 <section class="d-flex justify-content-between align-items-center">
@@ -33,7 +33,7 @@
             <section class="sidebar-brand-wrapper mb-3">          
                 {% for brand in brands %}
                 <section class="form-check sidebar-brand-item">
-                        <input class="form-check-input" type="checkbox" value="{{ brand.id }}" id="{{ brand.id }}">
+                        <input class="form-check-input" type="checkbox" name="brands" value="{{ brand.id }}" id="{{ brand.id }}">
                         <label class="form-check-label d-flex justify-content-between" for="{{ brand.id }}">
                             <span>{{ brand.title }}</span>
                         </label>
@@ -51,12 +51,12 @@
                 </section>
             </section>
             <section class="sidebar-price-range d-flex justify-content-between mb-4">
-                <section class="p-1"><input type="text" placeholder="قیمت از ..."></section>
-                <section class="p-1"><input type="text" placeholder="قیمت تا ..."></section>
+                <section class="p-1"><input type="text" name="start_price" placeholder="قیمت از ..."></section>
+                <section class="p-1"><input type="text" name="end_price" placeholder="قیمت تا ..."></section>
             </section>
 
             <section class="sidebar-filter-btn d-grid gap-2">
-                <button class="btn btn-danger" type="button">اعمال فیلتر</button>
+                <button class="btn btn-danger" type="submit">اعمال فیلتر</button>
             </section>
         </section>
     </form>

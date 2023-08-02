@@ -18,9 +18,19 @@ class ProductListView(ListView):
     
     def get_queryset(self):
         query = super().get_queryset()
-        category = self.kwargs.get('cat_id')    
+        category = self.kwargs.get('cat_id') 
+        request = self.request   
+        brands = request.GET.get('brands')
+        start_price = request.GET.get('start_price')
+        end_price = request.GET.get('end_price')
         if category is not None:
-            query = query.filter(category__id__iexact=category) 
+            query = query.filter(category__id__iexact=category)
+        if brands is not None:
+            query = query.filter(brand__id__iexact=brands) 
+        if start_price:
+            query = query.filter(price__gte=start_price)  
+        if end_price:
+            query = query.filter(price__lte=end_price)          
         return query
     
     

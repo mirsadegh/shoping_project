@@ -16,7 +16,8 @@ class ProductCategory(models.Model):
     
 class ProductBrand(models.Model):
     title = models.CharField(max_length=300, db_index=True, unique=True, verbose_name='عنوان برند')
-    status = models.BooleanField(default=True, verbose_name='فعال / غیر فعال')   
+    status = models.BooleanField(default=True, verbose_name='فعال / غیر فعال')
+    image = models.ImageField(upload_to='images/brands',blank=True, null=True, verbose_name='تصویر برند')   
     
     class Meta:
         verbose_name =  'برند'
