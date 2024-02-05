@@ -1,0 +1,80 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}ثبت نام{% endblock  %}
+
+{% block content %}
+
+<form method='post' enctype="multipart/form-data"> 
+    {% csrf_token %}
+    <section class="login-wrapper mb-5">
+        <section class="login-logo">
+            <img src="{% static 'images/logo/4.png' %}" alt="">
+        </section>     
+            {% for error in form.none_field_errors %}
+                <p class='alert alert-danger'>{{ error }}</p>
+            {% endfor %} 
+            
+            <section class='login-title mb-3'>{{ register_form.fullname.label_tag }}</section>
+            <section class="login-input-text mb-3"> {{ register_form.fullname }}</section>
+           {% for error in register_form.fullname.errors %}
+                <p class="alert alert-danger">{{ error }}</p>
+           {% endfor %}
+
+  
+
+            <section class='login-title mb-3'>{{ register_form.email.label_tag }}</section>
+            <section class="login-input-text mb-3"> {{ register_form.email }}</section>
+           {% for error in register_form.email.errors %}
+                <p class="alert alert-danger">{{ error }}</p>
+           {% endfor %}
+
+           <section class='login-title mb-3'>{{ register_form.phone.label_tag }}</section>
+           <section class="login-input-text mb-3"> {{ register_form.phone }}</section>
+          {% for error in register_form.phone.errors %}
+               <p class="alert alert-danger">{{ error }}</p>
+          {% endfor %}
+
+            <section class='login-title mb-3'>{{ register_form.password.label_tag }}</section>
+            <section class="login-input-text mb-3"> {{ register_form.password }}</section>
+           {% for error in register_form.password.errors %}
+                <p class="alert alert-danger">{{ error }}</p>
+           {% endfor %}
+
+            <section class='login-title mb-3'>{{ register_form.confirm_password.label_tag }}</section>
+            <section class="login-input-text mb-3"> {{ register_form.confirm_password }}</section>
+           {% for error in register_form.confirm_password.errors %}
+                <p class="alert alert-danger">{{ error }}</p>
+           {% endfor %}
+            <section class='login-title mb-3'>{{ register_form.avatar.label_tag }}</section>
+            <section class="login-input-text mb-3"> {{ register_form.avatar }}</section>
+           {% for error in register_form.avatar.errors %}
+                <p class="alert alert-danger">{{ error }}</p>
+           {% endfor %}
+           
+        
+
+            <section class="login-btn d-grid g-2 my-5">
+                <button class="btn btn-danger">ثبت نام</button>
+            </section>
+    
+        
+        <section class="login-terms-and-conditions">
+            <a href="#">شرایط و قوانین</a> 
+            را خوانده ام و پذیرفته ام
+        </section>
+        <section class="login-terms-and-conditions">
+            <a href="{% url 'account:login_otp' %}" class="text-decoration-none">ثبت نام با شماره موبایل</a>    
+        </section>
+    </section>
+</form>
+
+{% endblock  %}
+
+
+
+
+
+
+
+
+

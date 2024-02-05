@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+   {% include 'includes/header_reference.html' %}
+   <title> {% block title %}{% endblock %} </title>
+
+  {% block header_reference %}{% endblock  %}
+<body>
+
+    <!-- start header -->
+         {% include 'includes/header.html' %}
+    <!-- end header -->
+
+      
+
+    <!-- start body -->
+    <section class="container-xxl body-container">
+        {% include 'includes/messages.html' %}
+        {% block content %} {% endblock %}
+    </section>  
+    <!-- end body -->
+
+    <!-- start footer -->
+         {% include 'includes/footer.html' %}
+    <!-- end footer -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     {% include 'includes/footer_reference.html' %}
+    {% load sweetify %}
+    {% sweetify %}
+    {% block footer_reference %}{% endblock footer_reference %}
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<section class="sidebar-nav-sub-wrapper py-1 px-2">
+    <section class="sidebar-nav-sub-item">
+      {% for category in sub_categories %}
+           
+           {% if category.sub_cat.all %}
+                <span class="sidebar-nav-sub-item-title">
+                    {{ category.title }} 
+                    <i class="fa fa-angle-left"></i>
+                </span>
+            {% else %}
+                <span class="sidebar-nav-sub-item-title">
+                  <a href="{% url 'product:product_cat_list' cat_id=category.id %}" class="d-inline">
+                    {{ category.title }}
+                   </a>
+                </span>
+           {% endif %} 
+            {% if category.sub_cat.all %}
+               {% include 'product/includes/sub_categories.html' with sub_categories=category.sub_cat.all %}
+            {% endif %} 
+       {% endfor %} 
+    </section>
+</section>
+

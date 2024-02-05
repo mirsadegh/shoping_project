@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}ثبت نام{% endblock  %}
+
+{% block content %}
+            <form method='post'> 
+                {% csrf_token %}
+                <section class="login-wrapper mb-5">
+                    <section class="login-logo">
+                        <img src="{% static 'images/logo/4.png' %}" alt="">
+                    </section>     
+                        {% for error in form.none_field_errors %}
+                            <p class='alert alert-danger'>{{ error }}</p>
+                        {% endfor %} 
+                        <section class='login-title'>{{ form.phone.label_tag }}</section>
+                        <section class="login-input-text"> {{ form.phone }}</section>
+                        {% for error in form.phone.errors %}
+                                <p class="alert alert-danger">{{ error }}</p>
+                        {% endfor %}
+
+                       <section class="login-btn d-grid g-2">
+                            <button class="btn btn-danger">ثبت نام</button>
+                        </section>
+        
+                    <section class="login-terms-and-conditions">
+                        <a href="#">شرایط و قوانین</a> 
+                        را خوانده ام و پذیرفته ام
+                    </section>
+                </section>
+            </form>
+{% endblock  %}
+
+
+
